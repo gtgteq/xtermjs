@@ -1,0 +1,1 @@
+--command="stack ghci xtermjs:exe:server" --run="main"

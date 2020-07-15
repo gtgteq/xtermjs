@@ -1,0 +1,51 @@
+<!doctype>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>XTerm.js</title>
+  </head>
+  <body>
+    <div id="terminal"></div>
+<link rel="stylesheet" href="https://unpkg.com/xterm@4.8.1/css/xterm.css" integrity="sha384-hHh7jjWI76Rflq3JIy+9SOXFKKpW6ksE7hcXdpwTMd9k6ojxQxozNtRKWHuIxpVE" crossorigin="anonymous" />
+<script src="https://unpkg.com/xterm@4.8.1/lib/xterm.js" integrity="sha384-FRbUL1/34zoDy1WW6IMHbq7+VJYfQtLvKen1aKzgqAdOEBoMQ771FR6IgGh7fmHz" crossorigin="anonymous"></script>
+<script>
+  function runFakeTerminal() {
+    var term = new window.Terminal();
+    term.open(document.getElementById('terminal'));
+
+    if (term._initialized) {
+      return;
+    }
+    term._initialized = true;
+    console.log('Initializing...');
+
+    var sock = new WebSocket('ws://localhost:8080/ws');
+    sock.addEventListener('message', e => {
+      term.write(e.data);
+    });
+    sock.addEventListener('open', () => {
+      console.log('sock.onOpen');
+      term.writeln('Welcome to xterm.js');
+      term.writeln('This is a terminal emulation, with a fake terminal in the back-end.');
+      term.writeln('Type some keys and commands to play around.');
+      term.writeln('');
+      term.write('\r\n$ ');
+    });
+    sock.addEventListener('close', () => {
+      console.log('sock.onClose');
+    });
+
+    term.prompt = () => {
+      term.write('\r\n$ ');
+    };
+
+    term.onData(e => {
+      sock.send(e);
+    });
+  }
+
+  runFakeTerminal();
+</script>
+  </body>
+</html>

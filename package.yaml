@@ -1,0 +1,72 @@
+name:                xtermjs
+version:             0.1.0.0
+github:              "gtgteq/xtermjs"
+license:             BSD3
+author:              "gtgteq"
+maintainer:          "gtgteq.operator@gmail.com"
+copyright:           "2020 gtgteq"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/gtgteq/xtermjs#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- http-client
+- network
+- servant
+- servant-server
+- servant-websockets
+- wai-cors
+- wai-middleware-static
+- warp
+- websockets
+- bytestring
+- lens
+- monad-logger
+- mtl
+- safe-exceptions
+- text
+
+library:
+  source-dirs: src
+
+executables:
+  server:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - xtermjs
+
+  gen-purs:
+    main:                GeneratePureScript.hs
+    source-dirs:         gen
+    dependencies:
+    - xtermjs
+    - lens
+    - servant-purescript
+    - purescript-bridge
+
+tests:
+  xtermjs-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - xtermjs

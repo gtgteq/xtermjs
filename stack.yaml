@@ -1,0 +1,8 @@
+resolver: lts-16.5
+
+packages:
+- .
+# extra-deps: []
+nix:
+  packages:
+  - zlib

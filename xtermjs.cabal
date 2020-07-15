@@ -1,0 +1,134 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.34.2.
+--
+-- see: https://github.com/sol/hpack
+
+name:           xtermjs
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/gtgteq/xtermjs#readme>
+homepage:       https://github.com/gtgteq/xtermjs#readme
+bug-reports:    https://github.com/gtgteq/xtermjs/issues
+author:         gtgteq
+maintainer:     gtgteq.operator@gmail.com
+copyright:      2020 gtgteq
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/gtgteq/xtermjs
+
+library
+  exposed-modules:
+      App
+      Server
+  other-modules:
+      Paths_xtermjs
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , http-client
+    , lens
+    , monad-logger
+    , mtl
+    , network
+    , safe-exceptions
+    , servant
+    , servant-server
+    , servant-websockets
+    , text
+    , wai-cors
+    , wai-middleware-static
+    , warp
+    , websockets
+  default-language: Haskell2010
+
+executable gen-purs
+  main-is: GeneratePureScript.hs
+  other-modules:
+      Paths_xtermjs
+  hs-source-dirs:
+      gen
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , http-client
+    , lens
+    , monad-logger
+    , mtl
+    , network
+    , purescript-bridge
+    , safe-exceptions
+    , servant
+    , servant-purescript
+    , servant-server
+    , servant-websockets
+    , text
+    , wai-cors
+    , wai-middleware-static
+    , warp
+    , websockets
+    , xtermjs
+  default-language: Haskell2010
+
+executable server
+  main-is: Main.hs
+  other-modules:
+      Paths_xtermjs
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , http-client
+    , lens
+    , monad-logger
+    , mtl
+    , network
+    , safe-exceptions
+    , servant
+    , servant-server
+    , servant-websockets
+    , text
+    , wai-cors
+    , wai-middleware-static
+    , warp
+    , websockets
+    , xtermjs
+  default-language: Haskell2010
+
+test-suite xtermjs-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_xtermjs
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , http-client
+    , lens
+    , monad-logger
+    , mtl
+    , network
+    , safe-exceptions
+    , servant
+    , servant-server
+    , servant-websockets
+    , text
+    , wai-cors
+    , wai-middleware-static
+    , warp
+    , websockets
+    , xtermjs
+  default-language: Haskell2010
